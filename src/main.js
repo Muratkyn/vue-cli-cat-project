@@ -1,3 +1,9 @@
-import { createApp } from 'vue';
+import { createApp } from "vue";
+import App from "./App.vue";
+import CatsList from "./components/CatsList.vue";
 
-createApp({}).mount('');
+const app = createApp(App);
+
+app.component("cats-list", CatsList);
+
+app.mount("#app");
