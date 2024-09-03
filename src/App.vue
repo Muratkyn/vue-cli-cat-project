@@ -7,10 +7,12 @@
       <cats-list
         v-for="cat in cats"
         :key="cat.id"
+        :id="cat.id"
         :catName="cat.name"
         :catAge="cat.age"
         :catBreed="cat.breed"
-        :is-favorite="1"
+        :is-favourite="cat.isFavourite"
+        @toggle-favourite="toggleFavouriteStatus"
       >
       </cats-list>
     </ul>
@@ -28,15 +30,28 @@ export default {
           name: "Mirko",
           age: 3,
           breed: "European",
+          isFavourite: true,
         },
         {
           id: 2,
           name: "Sylvester",
           age: 8,
           breed: "Persian",
+          isFavourite: true,
         },
       ],
     };
+  },
+  methods: {
+    toggleFavouriteStatus(catId) {
+      const identifiedCat = this.cats.find((cat) => cat.id === catId);
+      identifiedCat.isFavourite = !identifiedCat.isFavourite;
+      console.log(this.cats[0].isFavourite);
+    },
+  },
+  mounted() {
+    //below is the status before we update the isFav within parent component
+    console.log(this.cats[0].isFavourite);
   },
 };
 </script>

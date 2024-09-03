@@ -1,7 +1,7 @@
 <template>
   <li>
-    <h2>{{ catName }} {{ isCatFavorite === "1" ? "(Fav)" : "" }}</h2>
-    <button @click="toggleFav">toggle Fav</button>
+    <h2>{{ catName }} {{ isFavourite ? "(Fav)" : "" }}</h2>
+    <button @click="toggleFavourite">toggle Fav</button>
     <button @click="toggleVisibility">
       {{ isVisible ? "Hide" : "Show" }} Details
     </button>
@@ -22,18 +22,22 @@
 export default {
   // props: ["catName", "catAge", "catBreed", "isFavorite"],
   props: {
+    id: {
+      type: Number,
+      required: true,
+    },
     catName: {
       type: String,
       required: true,
     },
     catAge: {
-      type: String,
+      type: Number,
       required: true,
     },
     catBreed: String,
-    isFavorite: {
-      type: String,
-      default: "0",
+    isFavourite: {
+      type: Boolean,
+      default: false,
       required: false,
       // validator: function (val) {
       //   return val === "1" || val === "0";
@@ -43,7 +47,6 @@ export default {
   name: "CatsList",
   data() {
     return {
-      isCatFavorite: this.isFavorite,
       isVisible: false,
       cats: {
         name: "Mirko",
@@ -56,13 +59,14 @@ export default {
     toggleVisibility() {
       this.isVisible = !this.isVisible;
     },
-    toggleFav() {
+    toggleFavourite() {
+      this.$emit("toggle-favourite", this.id);
       /// props can not be mutated directly!!!  error  Unexpected mutation of "isFavorite" prop
-      if (this.isCatFavorite === "1") {
-        this.isCatFavorite = "0";
-      } else {
-        this.isCatFavorite = "1";
-      }
+      // if (this.isCatFavorite === "1") {
+      //   this.isCatFavorite = "0";
+      // } else {
+      //   this.isCatFavorite = "1";
+      // }
     },
   },
 };
