@@ -4,6 +4,7 @@
       <h1>{{ title }}</h1>
     </header>
     <ul>
+      <new-cat @cat-data="addNewCat"> </new-cat>
       <cats-list
         v-for="cat in cats"
         :key="cat.id"
@@ -13,6 +14,7 @@
         :catBreed="cat.breed"
         :is-favourite="cat.isFavourite"
         @toggle-favourite="toggleFavouriteStatus"
+        @cat-delete="deleteCats"
       >
       </cats-list>
     </ul>
@@ -48,6 +50,20 @@ export default {
       identifiedCat.isFavourite = !identifiedCat.isFavourite;
       console.log(this.cats[0].isFavourite);
     },
+    addNewCat({ newName, newAge, newBreed }) {
+      const newAddedCat = {
+        id: new Date().toISOString(),
+        name: newName,
+        age: newAge,
+        breed: newBreed,
+        isFavourite: false,
+      };
+      this.cats.push(newAddedCat);
+      console.log(this.cats, "catss");
+    },
+    deleteCats(catId) {
+      this.cats = this.cats.filter((cat) => cat.id !== catId);
+    },
   },
   mounted() {
     //below is the status before we update the isFav within parent component
@@ -71,7 +87,7 @@ header {
   margin: 3rem auto;
   border-radius: 10px;
   padding: 1rem;
-  background-color: #58004d;
+  background-color: #65cd89;
   color: white;
   text-align: center;
   width: 90%;
@@ -82,7 +98,8 @@ header {
   padding: 0;
   list-style: none;
 }
-#app li {
+#app li,
+#app form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   margin: 1rem auto;
   border-radius: 10px;
@@ -94,22 +111,32 @@ header {
 #app h2 {
   font-size: 2rem;
   border-bottom: 4px solid #ccc;
-  color: #58004d;
+  color: #65cd89;
   margin: 0 0 1rem 0;
 }
 #app button {
   font: inherit;
   cursor: pointer;
-  border: 1px solid #ff0077;
-  background-color: #ff0077;
+  border: 1px solid #82cf79;
+  background-color: #82cf79;
   color: white;
   padding: 0.05rem 1rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
 }
 #app button:hover,
 #app button:active {
-  background-color: #ec3169;
-  border-color: #ec3169;
+  background-color: #a3db9d;
+  border-color: #a3db9d;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
+}
+
+#app form {
+  border-bottom: 4px solid #ccc;
+  color: #58004d;
+  flex-flow: column wrap;
+}
+
+#app form div {
+  padding: 4px;
 }
 </style>

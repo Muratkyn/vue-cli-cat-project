@@ -15,6 +15,7 @@
         {{ catBreed }}
       </li>
     </ul>
+    <button @click="$emit('cat-delete', id)">Delete</button>
   </li>
 </template>
 
@@ -44,6 +45,16 @@ export default {
       // },
     },
   },
+  emits: ["toggle-favourite", "cat-delete"],
+  // emits: {
+  //   "toggle-favourite": function (id) {
+  //     if (id) {
+  //       return true;
+  //     } else {
+  //       throw new Error("Id is missing!");
+  //     }
+  //   },
+  // },
   name: "CatsList",
   data() {
     return {
