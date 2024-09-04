@@ -48,7 +48,6 @@ export default {
         return;
       }
       identifiedCat.isFavourite = !identifiedCat.isFavourite;
-      console.log(this.cats[0].isFavourite);
     },
     addNewCat({ newName, newAge, newBreed }) {
       const newAddedCat = {
@@ -59,11 +58,9 @@ export default {
         isFavourite: false,
       };
       this.cats.push(newAddedCat);
-      console.log(this.cats, "catss");
     },
     deleteCats(catId) {
       const catIndex = this.cats.findIndex((cat) => cat.id === catId);
-      console.log(catIndex, "index");
       this.cats.splice(catIndex, 1);
     },
   },
