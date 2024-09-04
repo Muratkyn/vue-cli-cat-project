@@ -1,17 +1,38 @@
 <template>
   <section>
     <header>
-      <h1>Cats</h1>
+      <SlotComponent>
+        <template v-slot:title="slotProps">
+          <h1>{{ slotProps.title1 }}{{ slotProps.title2 }}</h1>
+        </template>
+      </SlotComponent>
+      <SlotComponent>
+        <template v-slot:content>
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoDim25Sj5loXJbpYM0NKMZI2geNtFbDme5A&s"
+            alt="cat"
+          />
+        </template>
+      </SlotComponent>
     </header>
     <ul>
-      <new-cat @cat-data="addNewCat"> </new-cat>
-      <cat-component></cat-component>
+      <CatForm @cat-data="addNewCat" />
+      <CatComponent />
     </ul>
   </section>
 </template>
 
 <script>
+import CatComponent from "./components/CatComponent.vue";
+import CatForm from "./components/CatForm.vue";
+import SlotComponent from "./components/SlotComponent.vue";
+
 export default {
+  components: {
+    CatComponent,
+    CatForm,
+    SlotComponent,
+  },
   provide() {
     return {
       cats: this.cats,
@@ -121,6 +142,8 @@ header {
   color: white;
   padding: 0.05rem 1rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
+  margin: 4px;
+  border-radius: 3px;
 }
 #app button:hover,
 #app button:active {
@@ -132,10 +155,18 @@ header {
 #app form {
   border-bottom: 4px solid #ccc;
   color: #58004d;
-  flex-flow: column wrap;
+  display: flex;
+  flex-direction: column;
 }
 
 #app form div {
   padding: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}
+#app input {
+  display: inline-block;
+  margin: 4px 4px;
 }
 </style>
