@@ -15,7 +15,7 @@
         {{ catBreed }}
       </li>
     </ul>
-    <button @click="deleteCat(id)">Delete</button>
+    <button @click="deleteCat(id)" class="bg-color">Delete</button>
   </li>
 </template>
 

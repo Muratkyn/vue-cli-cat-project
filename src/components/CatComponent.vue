@@ -1,6 +1,6 @@
 <template>
   <div>
-    <cats-list
+    <CatsList
       v-for="cat in cats"
       :key="cat.id"
       :id="cat.id"
@@ -8,13 +8,16 @@
       :catAge="cat.age"
       :catBreed="cat.breed"
       :is-favourite="cat.isFavourite"
-    >
-    </cats-list>
+    />
   </div>
 </template>
 
 <script>
+import CatsList from "./CatsList.vue";
 export default {
+  components: {
+    CatsList,
+  },
   inject: ["cats"],
   data() {
     return {};
