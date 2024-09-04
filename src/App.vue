@@ -1,28 +1,24 @@
 <template>
   <section>
     <header>
-      <h1>{{ title }}</h1>
+      <h1>Cats</h1>
     </header>
     <ul>
       <new-cat @cat-data="addNewCat"> </new-cat>
-      <cats-list
-        v-for="cat in cats"
-        :key="cat.id"
-        :id="cat.id"
-        :catName="cat.name"
-        :catAge="cat.age"
-        :catBreed="cat.breed"
-        :is-favourite="cat.isFavourite"
-        @toggle-favourite="toggleFavouriteStatus"
-        @cat-delete="deleteCats"
-      >
-      </cats-list>
+      <cat-component></cat-component>
     </ul>
   </section>
 </template>
 
 <script>
 export default {
+  provide() {
+    return {
+      cats: this.cats,
+      deleteCat: this.deleteCats,
+      toggleFavourite: this.toggleFavouriteStatus,
+    };
+  },
   data() {
     return {
       title: "Cats",
@@ -47,6 +43,10 @@ export default {
   methods: {
     toggleFavouriteStatus(catId) {
       const identifiedCat = this.cats.find((cat) => cat.id === catId);
+      if (!identifiedCat) {
+        console.error(`Cat with id ${catId} not found`);
+        return;
+      }
       identifiedCat.isFavourite = !identifiedCat.isFavourite;
       console.log(this.cats[0].isFavourite);
     },
@@ -62,7 +62,9 @@ export default {
       console.log(this.cats, "catss");
     },
     deleteCats(catId) {
-      this.cats = this.cats.filter((cat) => cat.id !== catId);
+      const catIndex = this.cats.findIndex((cat) => cat.id === catId);
+      console.log(catIndex, "index");
+      this.cats.splice(catIndex, 1);
     },
   },
   mounted() {

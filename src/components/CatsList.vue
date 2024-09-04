@@ -1,7 +1,7 @@
 <template>
   <li>
     <h2>{{ catName }} {{ isFavourite ? "(Fav)" : "" }}</h2>
-    <button @click="toggleFavourite">toggle Fav</button>
+    <button @click="toggleFavourite(id)">toggle Fav</button>
     <button @click="toggleVisibility">
       {{ isVisible ? "Hide" : "Show" }} Details
     </button>
@@ -15,13 +15,13 @@
         {{ catBreed }}
       </li>
     </ul>
-    <button @click="$emit('cat-delete', id)">Delete</button>
+    <button @click="deleteCat(id)">Delete</button>
   </li>
 </template>
 
 <script>
 export default {
-  // props: ["catName", "catAge", "catBreed", "isFavorite"],
+  inject: ["deleteCat", "toggleFavourite"],
   props: {
     id: {
       type: Number,
@@ -45,7 +45,6 @@ export default {
       // },
     },
   },
-  emits: ["toggle-favourite", "cat-delete"],
   // emits: {
   //   "toggle-favourite": function (id) {
   //     if (id) {
@@ -59,25 +58,11 @@ export default {
   data() {
     return {
       isVisible: false,
-      cats: {
-        name: "Mirko",
-        age: 3,
-        breed: "European",
-      },
     };
   },
   methods: {
     toggleVisibility() {
       this.isVisible = !this.isVisible;
-    },
-    toggleFavourite() {
-      this.$emit("toggle-favourite", this.id);
-      /// props can not be mutated directly!!!  error  Unexpected mutation of "isFavorite" prop
-      // if (this.isCatFavorite === "1") {
-      //   this.isCatFavorite = "0";
-      // } else {
-      //   this.isCatFavorite = "1";
-      // }
     },
   },
 };
