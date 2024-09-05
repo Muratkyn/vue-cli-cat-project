@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import ErrorComponent from "./ErrorComponent.vue";
+import ErrorComponent from "../modal/ErrorComponent.vue";
 
 export default {
   components: {
