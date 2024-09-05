@@ -5,8 +5,6 @@
         <template v-slot:title="slotProps">
           <h1>{{ slotProps.title1 }}{{ slotProps.title2 }}</h1>
         </template>
-      </SlotComponent>
-      <SlotComponent>
         <template v-slot:content>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoDim25Sj5loXJbpYM0NKMZI2geNtFbDme5A&s"
