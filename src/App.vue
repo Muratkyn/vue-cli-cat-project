@@ -5,7 +5,12 @@
         <template v-slot:title="slotProps">
           <h1>{{ slotProps.title1 }}{{ slotProps.title2 }}</h1>
         </template>
-        <template v-slot:content>
+        <!-- keep-alive tags keeps if we filla form and keeps the state cached in the dom, can be used with component which is dynamic  -->
+        <keep-alive>
+          <component :is="isvisible"></component>
+        </keep-alive>
+        <!-- we can also use #symbol for the template to bind the name of the slot -->
+        <template #content>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoDim25Sj5loXJbpYM0NKMZI2geNtFbDme5A&s"
             alt="cat"
@@ -105,7 +110,7 @@ header {
   margin: 3rem auto;
   border-radius: 10px;
   padding: 1rem;
-  background-color: #65cd89;
+  background-color: #42b883;
   color: white;
   text-align: center;
   width: 90%;
@@ -132,11 +137,11 @@ header {
   color: #65cd89;
   margin: 0 0 1rem 0;
 }
-#app button {
+button {
   font: inherit;
   cursor: pointer;
-  border: 1px solid #82cf79;
-  background-color: #82cf79;
+  border: 1px solid #35495e;
+  background-color: #35495e;
   color: white;
   padding: 0.05rem 1rem;
   box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.26);
@@ -145,8 +150,8 @@ header {
 }
 #app button:hover,
 #app button:active {
-  background-color: #a3db9d;
-  border-color: #a3db9d;
+  background-color: #4a5562;
+  border-color: #4a5562;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.26);
 }
 
@@ -157,7 +162,7 @@ header {
   flex-direction: column;
 }
 
-#app form div {
+form div {
   padding: 4px;
   display: flex;
   justify-content: center;

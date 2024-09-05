@@ -9,11 +9,14 @@
 
 <script>
 export default {
+  mounted() {
+    console.log(this.$slots);
+  },
   data() {
     return {
       title: "Title",
       datas: [
-        { id: 1, title1: "Add your" },
+        { id: 1, title1: "Add your fav" },
         { id: 2, title2: "Cat!" },
       ],
     };
