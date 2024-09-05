@@ -14,7 +14,7 @@ export default {
       title: "Title",
       datas: [
         { id: 1, title1: "Add your" },
-        { id: 2, title2: "Fav Cat!" },
+        { id: 2, title2: "Cat!" },
       ],
     };
   },
