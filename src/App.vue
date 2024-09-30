@@ -26,9 +26,9 @@
 </template>
 
 <script>
-import CatComponent from "./components/CatComponent.vue";
-import CatForm from "./components/CatForm.vue";
-import SlotComponent from "./components/SlotComponent.vue";
+import CatComponent from "./components/cats/CatsBase.vue";
+import CatForm from "./components/cats/CatsForm.vue";
+import SlotComponent from "./components/cats/CatsHeader.vue";
 
 export default {
   components: {
